@@ -1,3 +1,8 @@
+"" MY VIMRC
+"" I just got this on several sources on the internet
+"" para sakin lang to 
+
+
 set nocompatible
 
 " file type detection. 
@@ -53,16 +58,55 @@ set hlsearch
 set wildmenu
 set wildmode=list:longest
 
+" handle swap files  ------------ {{{
+if !isdirectory($HOME . '.vim/backup')
+    call mkdir($HOME .'/.vim/backup', 'p')
+endif
 
+
+if !isdirectory($HOME . '.vim/swap')
+    call mkdir($HOME .'/.vim/swap', 'p')
+endif
+
+if !isdirectory($HOME . '.vim/undo')
+    call mkdir($HOME .'/.vim/undo', 'p')
+endif
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+" }}}
 
 
 " PLUGINS --------------------------------- {{{
 call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree'
     Plug 'kien/ctrlp.vim'
+    Plug 'dense-analysis/ale'
 call plug#end()
+
 "
 " }}}
+"
+
+" MAPPINGS --------------------------- {{{
+" }}}
+
+
+" VIMSCRIPT ------------------------- {{{
+"
+" enable code folding
+" zo/zc to open/close the fold under curser
+" zR/zM to open/close all folds
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+
+"
+"}}}
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <leader>t :NERDTree<CR>
